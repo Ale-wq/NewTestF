@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      todos: []
+      items: []
     }
   }
 
@@ -16,30 +16,15 @@ componentDidMount() {
     axios.get("JsonPrueba.json")
       .then(response => {
         this.setState({
-          todos: response.data
+          items: response.data
         });
+        console.log(response.data);
       })
   }
 
-  
-  // componentDidMount() {
-  //   axios.post("")
-  //     .then(response => {
-  //       this.setState({
-  //         todos: response.data,
-  //         data: {
-  //           ef: 'files/900327563EEFFIFRS.tif',
-  //           nc: 'Prueba #54',
-  //           tipoArchivo : '1',
-  //           columna: '1'
-  //         }
-  //       });
-  //     })
-  // }
-
   render() {
-    const { todos = [] } = this.state;
-    console.debug(todos);
+    const { items = [] } = this.state;
+    console.debug(items);
     return (
       <div className="App">
         <header className="App-header">
@@ -54,23 +39,20 @@ componentDidMount() {
             </thead>
             <tbody>
               
-            {todos.length ? 
-              todos.map(todo => (
-                console.debug(todo),
+            {items.length ? 
+              items.data.map(item => (
                 <tr>
-                  <td>{todo.grupo}</td>
-                  <td>{todo.name}</td>
+                  <td>{item.grupo}</td>
+                  <td>{item.cuenta}</td>
                 </tr>
               ))
-              : 
-              
+              :
               (<tr>
                 <td>-</td>
                 <td>-</td>
-                <td>-</td>
-                <td>-</td>
-              </tr>)
-              
+                {/* <td>-</td>
+                <td>-</td> */}
+              </tr>)  
             }
             </tbody>
           </Table>
